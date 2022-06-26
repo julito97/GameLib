@@ -54,12 +54,12 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailTilLogin"
+                android:id="@+id/tilEmailLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/emailEtLogin"
+                    android:id="@+id/etEmailLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_email_gray"
@@ -73,14 +73,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/passwordTilLogin"
+                android:id="@+id/tilPasswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/emailTilLogin"
+                android:layout_below="@id/tilEmailLogin"
                 android:paddingTop="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordEtLogin"
+                    android:id="@+id/etPasswordLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_lock_gray"
@@ -94,10 +94,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/forgotPasswordTv"
+                android:id="@+id/tvForgotPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/passwordTilLogin"
+                android:layout_below="@id/tilPasswordLogin"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
@@ -107,7 +107,7 @@
                 android:id="@+id/btnLoginLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/forgotPasswordTv"
+                android:layout_below="@id/tvForgotPassword"
                 android:text="Login"
                 android:textColor="@color/white"
                 />
@@ -116,7 +116,6 @@
 
     </ScrollView>
 
-    <!-- TEXTVIEW INDICANDO QUE EL USUARIO SE REGISTRE SI ES NUEVO -->
     <TextView
         android:id="@+id/tvNoAccountLogin"
         android:layout_width="wrap_content"
