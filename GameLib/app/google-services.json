@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "307972970385",
+    "project_id": "gamelib-93da5",
+    "storage_bucket": "gamelib-93da5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307972970385:android:62fd1e68ec083506d8ec30",
+        "android_client_info": {
+          "package_name": "com.cursoudemy.gamelib"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307972970385-sfu4m56j2670uou8d007bcl8gffj0unk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cursoudemy.gamelib",
+            "certificate_hash": "424bf59ec42af5521d66f4d1aea8a51b08f27c59"
+          }
+        },
+        {
+          "client_id": "307972970385-bh0i7l1o3k1cmcbc1hqmlbghct5u4l2i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd00YgGH9nhQwrROwJbFoWQulkVCnUXTQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307972970385-bh0i7l1o3k1cmcbc1hqmlbghct5u4l2i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
