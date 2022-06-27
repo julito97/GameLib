@@ -1,6 +1,6 @@
 package com.cursoudemy.gamelib
 
-class Category {
+class Console {
     // Variables must match those in Firebase
     var id: String = ""
     var category: String = ""
