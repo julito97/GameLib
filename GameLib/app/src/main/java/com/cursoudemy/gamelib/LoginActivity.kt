@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.setCanceledOnTouchOutside(false)
         // If you have no account, you have to register
         binding.tvNoAccountLogin.setOnClickListener {
-            startActivity(Intent(this, RegisterActivity::class.java))
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
         // If you do have an account, the login process begins
         binding.btnLoginLogin.setOnClickListener {
@@ -84,11 +84,23 @@ class LoginActivity : AppCompatActivity() {
         val aux = FirebaseDatabase.getInstance().getReference("Users")
         aux.child(firebaseUser.uid)
             .addListenerForSingleValueEvent(object : ValueEventListener{
-                override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
-                }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    progressDialog.dismiss()
+                    // Get user type
+                    val userType = snapshot.child("userType").value
+                    if(userType == "user") {
+                        startActivity(Intent(this@LoginActivity, DashboardUserActivity::class.java))
+                        finish()
+                    }
+
+                    else if(userType == "admin") {
+                        startActivity(Intent(this@LoginActivity, DashboardAdminActivity::class.java))
+                        finish()
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
             })

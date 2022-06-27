@@ -7,10 +7,11 @@ import com.cursoudemy.gamelib.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mBinding:ActivityMainBinding
+    private lateinit var mBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
         // cuando pulsamos iniciar sesión
         mBinding.btnLoginMain.setOnClickListener {
@@ -25,5 +26,5 @@ class MainActivity : AppCompatActivity() {
 
 
 /*
-* REQUERIDO: enviar el email a la siguiente actividad
+* REQUERIDO: enviar el email a la siguiente actividad o chequear usando Firebase
 * */

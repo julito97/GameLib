@@ -93,10 +93,10 @@
                     android:id="@+id/etEmailRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_lock_gray"
+                    android:drawableStart="@drawable/ic_email"
                     android:drawablePadding="10dp"
                     android:hint="Email"
-                    android:inputType="textPassword"
+                    android:inputType="textEmailAddress"
                     android:padding="15dp"
                     android:textColor="@color/black"
                     android:textColorHint="#A5A5A5" />

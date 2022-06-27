@@ -88,7 +88,6 @@ class RegisterActivity : AppCompatActivity() {
         // Create user in Firebase Auth
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener { // If it can create the account, it will add the user info on the db
             updateUserInfo()
-
         }
             .addOnFailureListener { e->
                 progressDialog.dismiss()
@@ -108,7 +107,7 @@ class RegisterActivity : AppCompatActivity() {
         hashMap["name"] = name
         hashMap["pfp"] = "" // Empty
         hashMap["timestamp"] = timestamp
-        //hashMap["userType"] = "user"
+        hashMap["userType"] = "user"
         // Set data to db
         val aux = FirebaseDatabase.getInstance().getReference("Users")
         aux.child(uid!!)
