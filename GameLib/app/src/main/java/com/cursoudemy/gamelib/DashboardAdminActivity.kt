@@ -70,6 +70,7 @@ class DashboardAdminActivity : AppCompatActivity() {
         }
         // Add game button
         binding.btnAddGame.setOnClickListener {
+            startActivity(Intent(this@DashboardAdminActivity, AddGameActivity::class.java))
 
         }
         // Log out

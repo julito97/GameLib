@@ -3,8 +3,9 @@ package com.cursoudemy.gamelib
 import android.widget.Filter
 
 class ConsoleFilter: Filter {
-
+    // Arraylist in which we want to search
     private var filteredList: ArrayList<Console>
+    // Adapter
     private var consoleAdapter: ConsoleAdapter
 
     constructor(filterList: ArrayList<Console>, consoleAdapter: ConsoleAdapter) : super() {
