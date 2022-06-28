@@ -36,7 +36,7 @@ class DashboardAdminActivity : AppCompatActivity() {
         // Search function
         binding.etSearchConsole.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -51,7 +51,7 @@ class DashboardAdminActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                TODO("Not yet implemented")
+
             }
         })
 
@@ -73,6 +73,10 @@ class DashboardAdminActivity : AppCompatActivity() {
     private fun loadConsoles() { // To get the console list from the db
         // Initialize arraylist
         consoles = ArrayList()
+        // Set up adapter
+        adapter = ConsoleAdapter(this@DashboardAdminActivity, consoles)
+        // Set adapter to recyclerview
+        binding.rvConsoles.adapter = adapter
         // Get categories from the db: root > categories
         val aux = FirebaseDatabase.getInstance().getReference("Consoles")
         aux.addValueEventListener(object: ValueEventListener {
@@ -83,11 +87,8 @@ class DashboardAdminActivity : AppCompatActivity() {
                     val consoleModel = ds.getValue(Console::class.java)
                     // Add to arraylist
                     consoles.add(consoleModel!!)
+                    adapter.notifyDataSetChanged();
                 }
-                // Set up adapter
-                adapter = ConsoleAdapter(this@DashboardAdminActivity, consoles)
-                // Set adapter to recyclerview
-                binding.rvConsoles.adapter = adapter
             }
 
             override fun onCancelled(error: DatabaseError) {
