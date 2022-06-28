@@ -34,7 +34,7 @@ class DashboardAdminActivity : AppCompatActivity() {
         loadConsoles()
 
         // Search function
-        binding.etSearchCategory.addTextChangedListener(object: TextWatcher{
+        binding.etSearchConsole.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 TODO("Not yet implemented")
             }
@@ -66,10 +66,11 @@ class DashboardAdminActivity : AppCompatActivity() {
         // Log out
         binding.imgbtnLogoutDashboardAdmin.setOnClickListener {
             logOut()
+            checkUser()
         }
     }
 
-    private fun loadConsoles() {
+    private fun loadConsoles() { // To get the console list from the db
         // Initialize arraylist
         consoles = ArrayList()
         // Get categories from the db: root > categories
@@ -86,7 +87,7 @@ class DashboardAdminActivity : AppCompatActivity() {
                 // Set up adapter
                 adapter = ConsoleAdapter(this@DashboardAdminActivity, consoles)
                 // Set adapter to recyclerview
-                binding.rvCategories.adapter = adapter // NOTA: CAMBIAR NOMBRE DE CATEGORIES A CONSOLE MÁS ADELANTE
+                binding.rvConsoles.adapter = adapter
             }
 
             override fun onCancelled(error: DatabaseError) {

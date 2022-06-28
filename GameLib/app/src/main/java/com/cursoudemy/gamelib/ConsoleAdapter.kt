@@ -7,48 +7,47 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import com.cursoudemy.gamelib.databinding.RowCategoryBinding
+import com.cursoudemy.gamelib.databinding.RowConsoleBinding
+import com.google.android.material.transition.Hold
+//import com.cursoudemy.gamelib.databinding.RowCategoryBinding
 import com.google.firebase.database.FirebaseDatabase
 
-class ConsoleAdapter:RecyclerView.Adapter<ConsoleAdapter.HolderCategory>, Filterable {
+class ConsoleAdapter: RecyclerView.Adapter<ConsoleAdapter.HolderCategory>, Filterable {
 
     private val context: Context
-    public var consoleArray: ArrayList<Console>
-    private val filterList: ArrayList<Console>
-    private var filter: FilterConsole? = null
-    private lateinit var binding: RowCategoryBinding
+    public var consoleArraylist: ArrayList<Console>
+    private lateinit var binding: RowConsoleBinding
+    private var filterList: ArrayList<Console>
+    private var filter: ConsoleFilter? = null
 
-    constructor(context: Context, consoleArray: ArrayList<Console>) {
+    // Constructor
+    constructor(context: Context, consoleArraylist: ArrayList<Console>) {
         this.context = context
-        this.consoleArray = consoleArray
-        this.filterList = consoleArray
+        this.consoleArraylist = consoleArraylist
+        this.filterList = consoleArraylist
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderCategory {
-        // Inflate row category
-        binding = RowCategoryBinding.inflate(LayoutInflater.from(context), parent, false)
+        binding = RowConsoleBinding.inflate(LayoutInflater.from(context), parent, false)
         return HolderCategory(binding.root)
     }
 
     override fun onBindViewHolder(holder: HolderCategory, position: Int) {
-        // Get data, set data, handle click events
-        // 1) Get data
-        val model = consoleArray[position]
-        val id = model.id
-        val category = model.category
-        val uid = model.uid
-        val time = model.timestamp
+        // Get data, set data, handle clicks, etc
+        val console = consoleArraylist[position]
+        val id = console.id
+        val category = console.category
+        val timestamp = console.timestamp
         // Set data
-        binding.tvCategoryTitle.text = category
-        // Delete category
-        binding.btnDeleteCategory.setOnClickListener {
-            // Confirm before delete
+        holder.tvConsole.text = category
+        // Handle click to delete a console
+        binding.btnDeleteConsole.setOnClickListener {
             val builder = AlertDialog.Builder(context)
-            builder.setTitle("Delete")
-                .setMessage("Are you sure you want to delete?")
-                .setPositiveButton("Confirm") {a, d->
+            builder.setTitle("Delete").setMessage("Are you sure?")
+                .setPositiveButton("Confirm") { a, d->
                     Toast.makeText(context, "Deleting...", Toast.LENGTH_SHORT).show()
-                    deleteCategory(model, holder)
+                    deleteConsole(console, holder)
                 }
                 .setNegativeButton("Cancel") { a, d->
                     a.dismiss()
@@ -57,35 +56,33 @@ class ConsoleAdapter:RecyclerView.Adapter<ConsoleAdapter.HolderCategory>, Filter
         }
     }
 
-    private fun deleteCategory(console: Console, holder: HolderCategory) {
-        // We obtain the id of the console that will be deleted
+    private fun deleteConsole(console: Console, holder: HolderCategory) {
+        // Get the id of the item that will be deleted: root > consoles > id
         val id = console.id
-        // We search in the db: root > categories > console id
-        val aux = FirebaseDatabase.getInstance().getReference("Categories")
-        aux.child(id).removeValue()
-            .addOnSuccessListener {
-                Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show()
-            }
+        val aux = FirebaseDatabase.getInstance().getReference("Consoles")
+        aux.child("id").removeValue().addOnSuccessListener {
+            Toast.makeText(context, "The console was successfully deleted", Toast.LENGTH_SHORT).show()
+        }
             .addOnFailureListener { e->
-                Toast.makeText(context, "Unable to delete due to ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "Error while deleting: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
-    override fun getItemCount(): Int { // Size of the collection of categories
-        return consoleArray.size
+    override fun getItemCount(): Int { // Returns the number of items in the list
+        return consoleArraylist.size
     }
 
-    inner class HolderCategory(itemView: View): RecyclerView.ViewHolder(itemView) {
-
-        var tvCategory: TextView = binding.tvCategoryTitle
-        var btnDelete: ImageButton = binding.btnDeleteCategory
+    inner class HolderCategory(itemView: View): RecyclerView.ViewHolder(itemView) { // To init views for row_console.xml
+        // Init ui views
+        var tvConsole: TextView = binding.tvConsoleTitle
+        var btnDelete: ImageButton = binding.btnDeleteConsole
     }
 
     override fun getFilter(): Filter {
         if(filter == null) {
-            filter = FilterConsole(filterList, this)
+            filter = ConsoleFilter(filterList, this)
         }
 
-        return filter as FilterConsole
+        return filter as ConsoleFilter
     }
 }

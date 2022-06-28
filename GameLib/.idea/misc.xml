@@ -12,6 +12,7 @@
         <entry key="..\:/Users/Juli/AndroidStudioProjects/GameLib/app/src/main/res/layout/activity_splash.xml" value="0.3625" />
         <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/drawable/shape_button01.xml" value="0.2065" />
         <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/drawable/shape_button02.xml" value="0.2085" />
+        <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/drawable/shape_button03.xml" value="0.2425" />
         <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/drawable/shape_edit_text01.xml" value="0.2425" />
         <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/drawable/shape_toolbar02.xml" value="0.2085" />
         <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/layout/activity_add_console.xml" value="0.3625" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/layout/activity_main.xml" value="0.3625" />
         <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/layout/row_category.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/Juli/Downloads/GameLib/GameLib/app/src/main/res/layout/row_console.xml" value="0.3625" />
       </map>
     </option>
   </component>

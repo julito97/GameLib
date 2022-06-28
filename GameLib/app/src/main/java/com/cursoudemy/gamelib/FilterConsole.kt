@@ -44,7 +44,7 @@ class FilterConsole: Filter {
 
     override fun publishResults(constraint: CharSequence?, results: FilterResults) {
         // Apply filter changes
-        consoleAdapter.consoleArray = results.values as ArrayList<Console>
+        consoleAdapter.consoleArraylist = results.values as ArrayList<Console>
 
     }
 }
