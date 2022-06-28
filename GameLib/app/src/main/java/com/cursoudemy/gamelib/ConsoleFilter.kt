@@ -21,7 +21,7 @@ class ConsoleFilter: Filter {
             val filteredConsole: ArrayList<Console> = ArrayList()
             for(i in 0 until filteredConsole.size) {
                 // Validation
-                if(filteredList[i].category.uppercase().contains(constraint)) {
+                if(filteredList[i].console.uppercase().contains(constraint)) {
                     // Add to filtered list
                     filteredConsole.add(filteredList[i])
                 }

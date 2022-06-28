@@ -37,10 +37,10 @@ class ConsoleAdapter: RecyclerView.Adapter<ConsoleAdapter.HolderCategory>, Filte
         // Get data, set data, handle clicks, etc
         val console = consoleArraylist[position]
         val id = console.id
-        val category = console.category
+        val consoleName = console.console
         val timestamp = console.timestamp
         // Set data
-        holder.tvConsole.text = category
+        holder.tvConsole.text = consoleName
         // Handle click to delete a console
         binding.btnDeleteConsole.setOnClickListener {
             val builder = AlertDialog.Builder(context)

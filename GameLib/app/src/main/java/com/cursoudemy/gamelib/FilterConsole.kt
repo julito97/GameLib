@@ -23,7 +23,7 @@ class FilterConsole: Filter {
             val filteredModel: ArrayList<Console> = ArrayList()
                 for(i in 0 until filterList.size) {
                     // Validation
-                    if(filterList[i].category.uppercase().contains(constraint)) {
+                    if(filterList[i].console.uppercase().contains(constraint)) {
                         // Add to filtered list
                         filteredModel.add(filterList[i])
                     }
