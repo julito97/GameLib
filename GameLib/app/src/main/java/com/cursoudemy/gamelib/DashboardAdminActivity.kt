@@ -77,7 +77,7 @@ class DashboardAdminActivity : AppCompatActivity() {
         adapter = ConsoleAdapter(this@DashboardAdminActivity, consoles)
         // Set adapter to recyclerview
         binding.rvConsoles.adapter = adapter
-        // Get categories from the db: root > categories
+        // Get categories from the db: root > consoles
         val aux = FirebaseDatabase.getInstance().getReference("Consoles")
         aux.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
