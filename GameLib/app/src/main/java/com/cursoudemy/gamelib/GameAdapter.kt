@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cursoudemy.gamelib.databinding.RowGameBinding
 
-abstract class GameAdapter (private val games: List<Game>, val itemClickListener: GameAdapter.ItemClickListener): RecyclerView.Adapter<GameAdapter.ViewHolder>()  {
+class GameAdapter (private var games: List<Game>, val itemClickListener: GameAdapter.ItemClickListener): RecyclerView.Adapter<GameAdapter.ViewHolder>()  {
 
     private lateinit var context: Context
 
@@ -29,7 +29,7 @@ abstract class GameAdapter (private val games: List<Game>, val itemClickListener
             binding.tvGameDescription.text = description
             binding.tvGameStatus.text = status
             // Handle click to edit a game
-            binding.btnGameOptions.setOnClickListener {
+            binding.GameRow.setOnClickListener() {
                 itemClickListener.onClickItem(game)
             }
         }
@@ -37,6 +37,13 @@ abstract class GameAdapter (private val games: List<Game>, val itemClickListener
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(games[position])
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        context = parent.context
+        return ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.row_console, parent, false)
+        )
     }
 
     override fun getItemCount(): Int {

@@ -24,15 +24,11 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
     private lateinit var binding: ActivityDashboardAdminBinding
     // Firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
-    // Arraylist for the categories
+    // Arraylist for the consoles
     private var consoles = arrayListOf<Console>()
     private var copyList = consoles.clone() as ArrayList<Console>
     // Adapter
     private var mAdapter = ConsoleAdapter(consoles, this, this)
-    //
-    private lateinit var recyclerView: RecyclerView
-    //
-    private lateinit var mGridLayout : GridLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,7 +136,7 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
 
     override fun onClickText(console: String) {
         // Open activity with the games from that console
-        intent = Intent(this, GameListActivity::class.java)
+        val intent = Intent(this, GameListActivity::class.java)
         // Put extras
         intent.putExtra("console", console)
         // Init activity
