@@ -1,31 +1,33 @@
 package com.cursoudemy.gamelib
 
-import android.app.PendingIntent.getActivity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cursoudemy.gamelib.ConsoleAdapter.ItemClickListener
 import com.cursoudemy.gamelib.databinding.ActivityDashboardAdminBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.security.AccessController.getContext
+import java.util.*
 
 
-class DashboardAdminActivity : AppCompatActivity() {
+class DashboardAdminActivity : AppCompatActivity(), ItemClickListener {
     private lateinit var binding: ActivityDashboardAdminBinding
     // Firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
     // Arraylist for the categories
-    private lateinit var consoles: ArrayList<Console>
+    private var consoles = arrayListOf<Console>()
+    private var copyList = consoles.clone() as ArrayList<Console>
     // Adapter
-    private lateinit var mAdapter: ConsoleAdapter
+    private var mAdapter = ConsoleAdapter(consoles, this)
     //
     private lateinit var recyclerView: RecyclerView
     //
@@ -38,32 +40,28 @@ class DashboardAdminActivity : AppCompatActivity() {
 
         // Init Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
+        setUpRecyclerView()
         checkUser()
         loadConsoles()
-        setUpRecyclerView()
+
 
         // Search function
-        binding.etSearchConsole.addTextChangedListener(object: TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // Called when the user types something
-                try {
-                        mAdapter.filter.filter(p0)
+        binding.etSearchConsole.doOnTextChanged { text, _, _, _ ->
+            val filteredList = arrayListOf<Console>()
+            consoles.clear()
+            if (!text.isNullOrBlank()) {
+                val filterPattern = text.toString().lowercase(Locale.getDefault())
+                for (item in copyList) {
+                    if (item.console.lowercase(Locale.getDefault()).contains(filterPattern)) {
+                        filteredList.add(item)
+                    }
                 }
-
-                catch(e: Exception) {
-
-                }
+                consoles.addAll(filteredList)
+            } else {
+                consoles.addAll(copyList)
             }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-        })
-
+            mAdapter.notifyDataSetChanged()
+        }
         // Add console button
         binding.btnAddConsole.setOnClickListener {
             startActivity(Intent(this@DashboardAdminActivity, AddConsoleActivity::class.java))
@@ -81,15 +79,11 @@ class DashboardAdminActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        mAdapter = ConsoleAdapter(this@DashboardAdminActivity, consoles)
-        binding.rvConsoles.apply {
-            adapter = mAdapter
-        }
+        binding.rvConsoles.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
+        binding.rvConsoles.adapter = mAdapter
     }
 
     private fun loadConsoles() { // To get the console list from the db
-        // Initialize arraylist
-        consoles = ArrayList()
         // Get categories from the db: root > consoles
         val aux = FirebaseDatabase.getInstance().getReference("Consoles")
         aux.addValueEventListener(object: ValueEventListener {
@@ -100,21 +94,14 @@ class DashboardAdminActivity : AppCompatActivity() {
                     val consoleModel = ds.getValue(Console::class.java)
                     // Add to arraylist
                     consoles.add(consoleModel!!)
+                    copyList = consoles.clone() as ArrayList<Console>
                     mAdapter.notifyDataSetChanged();
                 }
-
-                // Set up adapter
-                mAdapter = ConsoleAdapter(this@DashboardAdminActivity, consoles)
-                // Set adapter to recyclerview
-                binding.rvConsoles.adapter = mAdapter
             }
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
-
         })
-
     }
 
     private fun logOut() {
@@ -136,5 +123,34 @@ class DashboardAdminActivity : AppCompatActivity() {
             binding.tvEmailDashboardAdmin.text = email
 
         }
+    }
+
+    override fun onClickItem(console: Console) {
+        // here we make add the logic to remove item
+        val builder = AlertDialog.Builder(this@DashboardAdminActivity)
+        builder.setTitle("Delete").setMessage("Are you sure?")
+            .setPositiveButton("Confirm") { a, d->
+                Toast.makeText(applicationContext, "Deleting...", Toast.LENGTH_SHORT).show()
+                deleteConsole(console)
+            }
+            .setNegativeButton("Cancel") { a, d->
+                a.dismiss()
+            }
+            .show()
+    }
+
+    private fun deleteConsole(console: Console) {
+        // Get the id of the item that will be deleted: root > consoles > id
+        val id = console.id
+        val aux = FirebaseDatabase.getInstance().getReference("Consoles")
+        aux.child("id").removeValue().addOnSuccessListener {
+            Toast.makeText(applicationContext, "The console was successfully deleted", Toast.LENGTH_SHORT).show()
+            // update the UI
+            consoles.remove(console)
+            mAdapter.notifyDataSetChanged()
+        }
+            .addOnFailureListener { e->
+                Toast.makeText(applicationContext, "Error while deleting: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }
