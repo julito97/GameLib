@@ -71,6 +71,7 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener {
             startActivity(Intent(this@DashboardAdminActivity, AddGameActivity::class.java))
 
         }
+
         // Log out
         binding.imgbtnLogoutDashboardAdmin.setOnClickListener {
             logOut()

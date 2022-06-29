@@ -75,7 +75,7 @@
                     android:drawableStart="@drawable/ic_person"
                     android:drawablePadding="10dp"
                     android:hint="Name"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPersonName"
                     android:padding="15dp"
                     android:textColor="@color/black"
                     android:textColorHint="#A5A5A5" />

@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edit_text01"
             android:hint="Game description"
-            android:inputType="textPersonName|textCapWords"
+            android:inputType="textPersonName"
             android:padding="12dp"
             android:textColor="@color/black"
             />
@@ -119,7 +119,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_edit_text01"
             android:hint="Game status"
-            android:inputType="textPersonName|textCapWords"
+            android:inputType="textPersonName"
             android:padding="12dp"
             android:textColor="@color/black"
             />
