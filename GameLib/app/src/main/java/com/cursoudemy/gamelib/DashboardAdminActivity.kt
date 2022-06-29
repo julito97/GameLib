@@ -141,7 +141,7 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener {
         // Get the id of the item that will be deleted: root > consoles > id
         val id = console.id
         val aux = FirebaseDatabase.getInstance().getReference("Consoles")
-        aux.child("id").removeValue().addOnSuccessListener {
+        aux.child(id).ref.removeValue().addOnSuccessListener {
             Toast.makeText(applicationContext, "The console was successfully deleted", Toast.LENGTH_SHORT).show()
             // update the UI
             consoles.remove(console)
