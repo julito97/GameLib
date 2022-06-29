@@ -14,9 +14,13 @@
         android:theme="@style/Theme.GameLib"
         tools:targetApi="31">
         <activity
+            android:name=".EditGameActivity"
+            android:exported="false"
+            android:parentActivityName=".GameListActivity"/>
+        <activity
             android:name=".GameListActivity"
-            android:parentActivityName=".DashboardAdminActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".DashboardAdminActivity" />
         <activity
             android:name=".AddGameActivity"
             android:exported="false" />

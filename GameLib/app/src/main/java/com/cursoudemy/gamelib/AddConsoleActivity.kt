@@ -61,10 +61,15 @@ class AddConsoleActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 Toast.makeText(this, "Console added successfully", Toast.LENGTH_SHORT).show()
+                clearFields()
             }
             .addOnFailureListener { e->
                 progressDialog.dismiss()
                 Toast.makeText(this, "Error while adding the new console: ${e.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun clearFields() {
+        binding.etAddConsole.setText("")
     }
 }

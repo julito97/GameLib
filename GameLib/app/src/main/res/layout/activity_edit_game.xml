@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditGameActivity">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutEditGame"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/shape_button01"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+        <ImageButton
+            android:id="@+id/btnBackEditGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_back" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="105dp"
+            android:layout_marginEnd="106dp"
+            android:layout_marginBottom="92dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/pacman" />
+
+        <TextView
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="111dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="113dp"
+            android:layout_marginBottom="36dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Edit game"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="28sp" />
+
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilTitleEditGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="200dp"
+        app:hintEnabled="false"
+        >
+
+        <EditText
+            android:id="@+id/etGameTitleEditGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edit_text01"
+            android:hint="Game title"
+            android:inputType="textPersonName|textCapWords"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilDescriptionEditGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/tilTitleEditGame"
+        app:hintEnabled="false"
+        >
+
+        <EditText
+            android:id="@+id/etGameDescriptionEditGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edit_text01"
+            android:hint="Game description"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilStatusEditGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/tilDescriptionEditGame"
+        app:hintEnabled="false"
+        >
+
+        <EditText
+            android:id="@+id/etGameStatusEditGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edit_text01"
+            android:hint="Game status"
+            android:inputType="textPersonName"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvConsoleAddGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tilStatusEditGame"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:drawableEnd="@drawable/ic_arrow_down"
+        android:gravity="center_vertical"
+        android:hint="Console"
+        android:textColor="@color/black"
+        android:textColorHint="#AAAAAA"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnEditGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/tvConsoleAddGame"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:text="Submit"/>
+
+</RelativeLayout>

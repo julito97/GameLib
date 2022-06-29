@@ -136,10 +136,18 @@ class AddGameActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 Toast.makeText(this, "Game added successfully", Toast.LENGTH_SHORT).show()
+                clearFields()
             }
             .addOnFailureListener { e->
                 progressDialog.dismiss()
                 Toast.makeText(this, "Error while adding the new game: ${e.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun clearFields() {
+        binding.etGameTitleAddGame.setText("")
+        binding.etGameDescriptionAddGame.setText("")
+        binding.etGameStatusAddGame.setText("")
+        binding.tvConsoleAddGame.text = "Console"
     }
 }

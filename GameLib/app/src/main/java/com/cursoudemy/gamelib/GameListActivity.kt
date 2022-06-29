@@ -119,6 +119,11 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
         builder.setTitle("Select an option")
         builder.setPositiveButton("Edit") { dialog, which ->
             // Edit the selected game
+            val intent = Intent(this, EditGameActivity::class.java)
+            // Put extras
+            intent.putExtra("title", gameForOptions.title)
+            // Init activity
+            startActivity(intent)
         }
         builder.setNegativeButton("Delete") { dialog, which ->
             // Delete element from db and adapter
