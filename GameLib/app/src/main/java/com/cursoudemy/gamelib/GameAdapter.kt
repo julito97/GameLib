@@ -29,7 +29,10 @@ class GameAdapter (private var games: List<Game>, val itemClickListener: GameAda
             binding.tvGameDescription.text = description
             binding.tvGameStatus.text = status
             // Handle click to edit a game
-            binding.GameRow.setOnClickListener() {
+            binding.GameRow.setOnClickListener() { // Esto PUEDE ser causante de errores
+                itemClickListener.onClickItem(game)
+            }
+            binding.btnGameMore.setOnClickListener {
                 itemClickListener.onClickItem(game)
             }
         }

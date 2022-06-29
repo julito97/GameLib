@@ -1,8 +1,11 @@
 package com.cursoudemy.gamelib
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -111,7 +114,31 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
         }
 
     override fun onClickItem(game: Game) {
-        TODO("Not yet implemented")
+        var gameForOptions = game
+        val builder = AlertDialog.Builder(this@GameListActivity)
+        builder.setTitle("Select an option")
+        builder.setPositiveButton("Edit") { dialog, which ->
+            // Edit the selected game
+        }
+        builder.setNegativeButton("Delete") { dialog, which ->
+            // Delete element from db and adapter
+            deleteGame(gameForOptions)
+        }
+        builder.show()
+    }
+
+    private fun deleteGame(game: Game) {
+        val id = game.id
+        val aux = FirebaseDatabase.getInstance().getReference("Games")
+        aux.child(id).ref.removeValue().addOnSuccessListener {
+            Toast.makeText(applicationContext, "The console was successfully deleted", Toast.LENGTH_SHORT).show()
+            // update the UI
+            games.remove(game)
+            adapter.notifyDataSetChanged()
+        }
+            .addOnFailureListener { e->
+                Toast.makeText(applicationContext, "Error while deleting: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     /* TO LOAD ALL GAMES
