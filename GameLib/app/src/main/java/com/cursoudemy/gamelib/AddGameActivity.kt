@@ -21,6 +21,7 @@ class AddGameActivity : AppCompatActivity() {
     private var selectedConsoleName = ""
     private var title = ""
     private var description = ""
+    private var gameStatus = ""
     private var consoleName = ""
     // Show while submitting the info into the db
     private lateinit var progressDialog: ProgressDialog
@@ -97,12 +98,16 @@ class AddGameActivity : AppCompatActivity() {
         title = binding.etGameTitleAddGame.text.toString().trim()
         description = binding.etGameDescriptionAddGame.text.toString().trim()
         selectedConsoleName = binding.tvConsoleAddGame.text.toString().trim()
+        gameStatus = binding.etGameStatusAddGame.text.toString().trim()
         // Validation
         if(title.isEmpty()) {
             Toast.makeText(this, "You have to introduce a name for the game", Toast.LENGTH_SHORT).show()
         }
         else if(selectedConsoleName.isEmpty()) {
             Toast.makeText(this, "You have to introduce a console for the game", Toast.LENGTH_SHORT).show()
+        }
+        else if(gameStatus.isEmpty()) {
+            Toast.makeText(this, "You have to add a custom status for the game", Toast.LENGTH_SHORT).show()
         }
         else { // Data validated
             progressDialog.setMessage("Adding game to your collection...")
@@ -119,11 +124,12 @@ class AddGameActivity : AppCompatActivity() {
         hashMap["id"] = "$timestamp"
         hashMap["title"] = title
         hashMap["description"] = description
+        hashMap["status"] = gameStatus
         hashMap["console"] = consoleName
         hashMap["timestamp"] = timestamp
         hashMap["uid"] = "${firebaseAuth.uid}"
 
-        // Ad to db: Root -> Consoles -> consoleId -> console info
+        // Ad to db: Root -> Games
         val aux = FirebaseDatabase.getInstance().getReference("Games")
         aux.child("$timestamp")
             .setValue(hashMap)

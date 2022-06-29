@@ -107,14 +107,14 @@ class RegisterActivity : AppCompatActivity() {
         hashMap["name"] = name
         hashMap["pfp"] = "" // Empty
         hashMap["timestamp"] = timestamp
-        hashMap["userType"] = "user"
+        hashMap["userType"] = "admin"
         // Set data to db
         val aux = FirebaseDatabase.getInstance().getReference("Users")
         aux.child(uid!!)
             .setValue(hashMap)
             .addOnSuccessListener {
                 Toast.makeText(this, "Account info saving done correctly.", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, DashboardUserActivity::class.java))
+                startActivity(Intent(this, DashboardAdminActivity::class.java))
                 finish()
 
             }

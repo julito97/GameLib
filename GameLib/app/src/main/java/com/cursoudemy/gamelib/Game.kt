@@ -5,6 +5,7 @@ class Game {
     var id: String = ""
     var title = ""
     var description = ""
+    var status = ""
     var console: String = ""
     var timestamp: Long = 0
     var uid : String = ""

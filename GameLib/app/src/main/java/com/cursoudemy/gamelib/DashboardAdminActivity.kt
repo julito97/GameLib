@@ -117,11 +117,9 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-
         else { //properly logged in; get and show user info
             val email = firebaseUser.email
             binding.tvEmailDashboardAdmin.text = email
-
         }
     }
 

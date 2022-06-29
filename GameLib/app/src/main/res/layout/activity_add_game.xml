@@ -102,11 +102,35 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilStatusAddGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/tilDescriptionAddGame"
+        app:hintEnabled="false"
+        >
+
+        <EditText
+            android:id="@+id/etGameStatusAddGame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_edit_text01"
+            android:hint="Game status"
+            android:inputType="textPersonName|textCapWords"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:id="@+id/tvConsoleAddGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tilDescriptionAddGame"
+        android:layout_below="@id/tilStatusAddGame"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"

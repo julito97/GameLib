@@ -87,17 +87,8 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     progressDialog.dismiss()
-                    // Get user type
-                    val userType = snapshot.child("userType").value
-                    if(userType == "user") {
-                        startActivity(Intent(this@LoginActivity, DashboardUserActivity::class.java))
-                        finish()
-                    }
-
-                    else if(userType == "admin") {
                         startActivity(Intent(this@LoginActivity, DashboardAdminActivity::class.java))
                         finish()
-                    }
                 }
 
                 override fun onCancelled(error: DatabaseError) {

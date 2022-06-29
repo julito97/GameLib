@@ -40,23 +40,15 @@ class SplashActivity : AppCompatActivity() {
                 .addListenerForSingleValueEvent(object : ValueEventListener {
 
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        // Get user type
-                        val userType = snapshot.child("userType").value
-                        if(userType == "user") {
-                            startActivity(Intent(this@SplashActivity, DashboardUserActivity::class.java))
-                            finish()
-                        }
-
-                        else if(userType == "admin") {
                             startActivity(Intent(this@SplashActivity, DashboardAdminActivity::class.java))
                             finish()
                         }
-                    }
 
                     override fun onCancelled(error: DatabaseError) {
                         TODO("Not yet implemented")
                     }
-                })
+                }
+                )
         }
     }
 }
