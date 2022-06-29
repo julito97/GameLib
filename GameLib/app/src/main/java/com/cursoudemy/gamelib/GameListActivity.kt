@@ -54,7 +54,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
             if (!text.isNullOrBlank()) {
                 val filterPattern = text.toString().lowercase(Locale.getDefault())
                 for (item in copyList) {
-                    if (item.console.lowercase(Locale.getDefault()).contains(filterPattern)) {
+                    if (item.title.lowercase(Locale.getDefault()).contains(filterPattern)) {
                         filteredList.add(item)
                     }
                 }
@@ -64,27 +64,6 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
             }
             adapter.notifyDataSetChanged()
         }
-    }
-
-    private fun loadGames() {
-        // Get categories from the db: root > Games
-        val aux = FirebaseDatabase.getInstance().getReference("Games")
-        aux.addValueEventListener(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                // Clear list before start adding data into it
-                games.clear()
-                for(ds in snapshot.children) {
-                    val gameModel = ds.getValue(Game::class.java)
-                    // Add to arraylist
-                    games.add(gameModel!!)
-                    copyList = games.clone() as ArrayList<Game>
-                    adapter.notifyDataSetChanged();
-                }
-            }
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
     }
 
     private fun setUpRecyclerView() {
@@ -97,10 +76,6 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
         return true
     }
 
-    override fun onClickItem(game: Game) {
-        TODO("Not yet implemented")
-    }
-
     private fun checkUser() {
         val firebaseUser = firebaseAuth.currentUser
         if(firebaseUser == null) {
@@ -111,4 +86,50 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
         else { //properly logged in; don't show anything this time
         }
     }
-}
+
+    private fun loadGames() {
+        // Get categories from the db: root > Games
+        val aux = FirebaseDatabase.getInstance().getReference("Games")
+        aux.orderByChild("console").equalTo(consoleName)
+            .addValueEventListener(object: ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    games.clear()
+                    for (ds in snapshot.children) {
+                        val modelGame = ds.getValue(Game::class.java)
+                        games.add(modelGame!!)
+                        copyList = games.clone() as ArrayList<Game>
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
+        }
+
+    override fun onClickItem(game: Game) {
+        TODO("Not yet implemented")
+    }
+
+    /* TO LOAD ALL GAMES
+    aux.addValueEventListener(object: ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+            // Clear list before start adding data into it
+            games.clear()
+            for(ds in snapshot.children) {
+                val gameModel = ds.getValue(Game::class.java)
+                // Add to arraylist
+                games.add(gameModel!!)
+                copyList = games.clone() as ArrayList<Game>
+                adapter.notifyDataSetChanged();
+            }
+        }
+        override fun onCancelled(error: DatabaseError) {
+            TODO("Not yet implemented")
+        }
+    }) */
+    }
+

@@ -42,7 +42,7 @@ class GameAdapter (private var games: List<Game>, val itemClickListener: GameAda
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.row_console, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.row_game, parent, false)
         )
     }
 
