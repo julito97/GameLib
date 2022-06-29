@@ -21,7 +21,7 @@ class AddGameActivity : AppCompatActivity() {
     private var selectedConsoleName = ""
     private var title = ""
     private var description = ""
-    private var console = ""
+    private var consoleName = ""
     // Show while submitting the info into the db
     private lateinit var progressDialog: ProgressDialog
 
@@ -43,6 +43,10 @@ class AddGameActivity : AppCompatActivity() {
 
         binding.tvConsoleAddGame.setOnClickListener {
             consolePickDialog()
+        }
+
+        binding.btnBackAddGame.setOnClickListener {
+            onBackPressed()
         }
     }
 
@@ -84,6 +88,7 @@ class AddGameActivity : AppCompatActivity() {
                 selectedConsoleId = consoles[which].id
                 // Set console to textview
                 binding.tvConsoleAddGame.text = selectedConsoleName
+                consoleName = selectedConsoleName
             } .show()
     }
 
@@ -91,19 +96,44 @@ class AddGameActivity : AppCompatActivity() {
         // Get data; description can be empty
         title = binding.etGameTitleAddGame.text.toString().trim()
         description = binding.etGameDescriptionAddGame.text.toString().trim()
-        console = binding.tvConsoleAddGame.text.toString().trim()
+        selectedConsoleName = binding.tvConsoleAddGame.text.toString().trim()
         // Validation
         if(title.isEmpty()) {
             Toast.makeText(this, "You have to introduce a name for the game", Toast.LENGTH_SHORT).show()
         }
-        else if(console.isEmpty()) {
+        else if(selectedConsoleName.isEmpty()) {
             Toast.makeText(this, "You have to introduce a console for the game", Toast.LENGTH_SHORT).show()
         }
         else { // Data validated
             progressDialog.setMessage("Adding game to your collection...")
             progressDialog.show()
-            // Copy the missing steps from the add console class
-
+            addGame()
         }
+    }
+
+    private fun addGame() {
+        progressDialog.show()
+        val timestamp = System.currentTimeMillis()
+        // Add id, title, console, timestamp, uid
+        val hashMap = HashMap<String, Any>()
+        hashMap["id"] = "$timestamp"
+        hashMap["title"] = title
+        hashMap["description"] = description
+        hashMap["console"] = consoleName
+        hashMap["timestamp"] = timestamp
+        hashMap["uid"] = "${firebaseAuth.uid}"
+
+        // Ad to db: Root -> Consoles -> consoleId -> console info
+        val aux = FirebaseDatabase.getInstance().getReference("Games")
+        aux.child("$timestamp")
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(this, "Game added successfully", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener { e->
+                progressDialog.dismiss()
+                Toast.makeText(this, "Error while adding the new game: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 }
