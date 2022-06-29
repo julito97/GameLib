@@ -47,8 +47,5 @@ abstract class GameAdapter (private val games: List<Game>, val itemClickListener
         fun onClickItem(game: Game)
     }
 
-
-
-
 }
 

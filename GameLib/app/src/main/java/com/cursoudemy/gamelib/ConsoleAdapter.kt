@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cursoudemy.gamelib.databinding.RowConsoleBinding
 
-class ConsoleAdapter(private val consoles: List<Console>, val itemClickListener: ItemClickListener): RecyclerView.Adapter<ConsoleAdapter.ViewHolder>() {
+class ConsoleAdapter(private val consoles: List<Console>, val itemClickListener: ItemClickListener, val textClickListener: TextClickListener):
+    RecyclerView.Adapter<ConsoleAdapter.ViewHolder>() {
 
     private lateinit var context: Context
 
@@ -25,6 +26,9 @@ class ConsoleAdapter(private val consoles: List<Console>, val itemClickListener:
             // Handle click to delete a console
             binding.btnDeleteConsole.setOnClickListener {
                 itemClickListener.onClickItem(console)
+            }
+            binding.tvConsoleTitle.setOnClickListener {
+                textClickListener.onClickText(console)
             }
         }
     }
@@ -44,5 +48,9 @@ class ConsoleAdapter(private val consoles: List<Console>, val itemClickListener:
 
     interface ItemClickListener{
         fun onClickItem(console: Console)
+    }
+
+    interface TextClickListener{
+        fun onClickText(console: Console)
     }
 }

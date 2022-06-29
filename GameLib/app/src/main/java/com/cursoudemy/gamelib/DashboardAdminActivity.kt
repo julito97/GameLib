@@ -19,7 +19,8 @@ import com.google.firebase.database.ValueEventListener
 import java.util.*
 
 
-class DashboardAdminActivity : AppCompatActivity(), ItemClickListener {
+class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
+    ConsoleAdapter.TextClickListener {
     private lateinit var binding: ActivityDashboardAdminBinding
     // Firebase Auth
     private lateinit var firebaseAuth: FirebaseAuth
@@ -27,7 +28,7 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener {
     private var consoles = arrayListOf<Console>()
     private var copyList = consoles.clone() as ArrayList<Console>
     // Adapter
-    private var mAdapter = ConsoleAdapter(consoles, this)
+    private var mAdapter = ConsoleAdapter(consoles, this, this)
     //
     private lateinit var recyclerView: RecyclerView
     //
@@ -136,6 +137,11 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener {
                 a.dismiss()
             }
             .show()
+    }
+
+    override fun onClickText(console: Console) {
+        // Open activity with the games from that console
+
     }
 
     private fun deleteConsole(console: Console) {
