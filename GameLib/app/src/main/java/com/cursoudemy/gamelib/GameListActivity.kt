@@ -14,6 +14,9 @@ class GameListActivity : AppCompatActivity() {
         actionbar!!.title = "Game list"
         //set back button
         actionbar.setDisplayHomeAsUpEnabled(true)
+
+        val bundle:Bundle = intent.extras
+        val consoleName = bundle.get("console")
     }
 
     override fun onSupportNavigateUp(): Boolean {

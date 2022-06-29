@@ -28,7 +28,7 @@ class ConsoleAdapter(private val consoles: List<Console>, val itemClickListener:
                 itemClickListener.onClickItem(console)
             }
             binding.tvConsoleTitle.setOnClickListener {
-                textClickListener.onClickText(console)
+                textClickListener.onClickText(consoleName)
             }
         }
     }
@@ -51,6 +51,6 @@ class ConsoleAdapter(private val consoles: List<Console>, val itemClickListener:
     }
 
     interface TextClickListener{
-        fun onClickText(console: Console)
+        fun onClickText(console: String)
     }
 }

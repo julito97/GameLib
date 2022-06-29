@@ -72,7 +72,6 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
             startActivity(Intent(this@DashboardAdminActivity, AddGameActivity::class.java))
 
         }
-
         // Log out
         binding.imgbtnLogoutDashboardAdmin.setOnClickListener {
             logOut()
@@ -139,9 +138,13 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
             .show()
     }
 
-    override fun onClickText(console: Console) {
+    override fun onClickText(console: String) {
         // Open activity with the games from that console
-
+        intent = Intent(this, GameListActivity::class.java)
+        // Put extras
+        intent.putExtra("console", console)
+        // Init activity
+        startActivity(intent)
     }
 
     private fun deleteConsole(console: Console) {
