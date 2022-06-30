@@ -113,6 +113,11 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
 
         }
 
+    override fun onResume() {
+        super.onResume()
+        loadGames()
+    }
+
     override fun onClickItem(game: Game) {
         var gameForOptions = game
         val builder = AlertDialog.Builder(this@GameListActivity)
@@ -122,6 +127,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
             val intent = Intent(this, EditGameActivity::class.java)
             // Put extras
             intent.putExtra("title", gameForOptions.title)
+            //intent.putExtra("id", gameForOptions.id)
             // Init activity
             startActivity(intent)
         }

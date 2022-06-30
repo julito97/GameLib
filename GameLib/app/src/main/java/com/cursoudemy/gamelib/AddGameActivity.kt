@@ -121,8 +121,8 @@ class AddGameActivity : AppCompatActivity() {
         val timestamp = System.currentTimeMillis()
         // Add id, title, console, timestamp, uid
         val hashMap = HashMap<String, Any>()
-        hashMap["id"] = "$timestamp"
         hashMap["title"] = title
+        hashMap["id"] = "$timestamp"
         hashMap["description"] = description
         hashMap["status"] = gameStatus
         hashMap["console"] = consoleName
@@ -131,7 +131,7 @@ class AddGameActivity : AppCompatActivity() {
 
         // Ad to db: Root -> Games
         val aux = FirebaseDatabase.getInstance().getReference("Games")
-        aux.child("$timestamp")
+        aux.child(title)
             .setValue(hashMap)
             .addOnSuccessListener {
                 progressDialog.dismiss()

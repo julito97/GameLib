@@ -17,12 +17,12 @@ class GameAdapter (private var games: List<Game>, val itemClickListener: GameAda
 
         fun bind(game: Game) {
             val game = game
-            val id = game.id
+            //val id = game.id
             val title = game.title
             val status = game.status
             val description = game.description
             val console = game.console
-            val timestamp = game.timestamp
+            //val timestamp = game.timestamp
             // Set data
             binding.tvGameTitle.text = title
             binding.tvGameConsole.text = console
