@@ -14,9 +14,12 @@
         android:theme="@style/Theme.GameLib"
         tools:targetApi="31">
         <activity
+            android:name=".main.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".edition.EditGameActivity"
             android:exported="false"
-            android:parentActivityName=".main.GameListActivity"/>
+            android:parentActivityName=".main.GameListActivity" />
         <activity
             android:name=".main.GameListActivity"
             android:exported="false"

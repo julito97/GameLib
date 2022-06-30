@@ -78,6 +78,8 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
         }
     }
 
+    // Sección de métodos
+
     private fun setUpRecyclerView() {
         binding.rvConsoles.layoutManager = LinearLayoutManager(applicationContext, RecyclerView.VERTICAL, false)
         binding.rvConsoles.adapter = mAdapter

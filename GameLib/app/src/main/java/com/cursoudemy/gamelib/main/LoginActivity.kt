@@ -43,6 +43,10 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLoginLogin.setOnClickListener {
             validateData()
         }
+        // Lanza la actividad de recuperación de la contraseña
+        binding.tvForgotPassword.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, ForgotPasswordActivity::class.java))
+        }
     }
 
     private fun validateData() {
