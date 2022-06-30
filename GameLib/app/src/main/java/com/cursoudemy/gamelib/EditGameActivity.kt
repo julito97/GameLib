@@ -120,9 +120,10 @@ class EditGameActivity : AppCompatActivity() {
 
     private fun updateGame() {
         val timestamp = System.currentTimeMillis()
-        // Add id, title, console, timestamp, uid
+        //
+        gameTitleEdit = binding.etGameTitleEditGame.text.toString().trim()
         descriptionEdit = binding.etGameDescriptionEditGame.text.toString().trim()
-        statusEdit = binding.etGameDescriptionEditGame.text.toString().trim()
+        statusEdit = binding.etGameStatusEditGame.text.toString().trim()
         consoleName = binding.tvConsoleAddGame.text.toString().trim()
 
         val hashMap = HashMap<String, Any>()
@@ -130,12 +131,12 @@ class EditGameActivity : AppCompatActivity() {
         hashMap["description"] = descriptionEdit
         hashMap["id"] = timestamp
         hashMap["status"] = statusEdit
-        hashMap["timestamp"] = timestamp
+        //hashMap["timestamp"] = timestamp
         hashMap["title"] = gameTitleEdit
         hashMap["uid"] = "${firebaseAuth.uid}"
 
         val aux = FirebaseDatabase.getInstance().getReference("Games")
-        /*aux.child(gameTitleEdit)
+        aux.child(gameTitle) //
             .updateChildren(hashMap).addOnSuccessListener {
                 Toast.makeText(this, "Juego editado exitosamente", Toast.LENGTH_SHORT).show()
                 clearFields()
@@ -146,8 +147,8 @@ class EditGameActivity : AppCompatActivity() {
                     "Error al actualizar el juego: ${e.message}",
                     Toast.LENGTH_SHORT
                 ).show()
-            } */
-
+            }
+        /*
         aux.child(gameTitleEdit).child("console").setValue(hashMap["description"])
         aux.child(gameTitleEdit).child("description").setValue(hashMap["description"])
         aux.child(gameTitleEdit).child("id").setValue(hashMap["id"])
@@ -161,7 +162,7 @@ class EditGameActivity : AppCompatActivity() {
             .addOnFailureListener { e->
                 progressDialog.dismiss()
                 Toast.makeText(this, "Error al actualizar el juego: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+            } */
     }
 
     private fun loadEditInfo() {

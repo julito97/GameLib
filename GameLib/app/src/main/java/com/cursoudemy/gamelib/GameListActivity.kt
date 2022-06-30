@@ -130,6 +130,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
             //intent.putExtra("id", gameForOptions.id)
             // Init activity
             startActivity(intent)
+            finish()
         }
         builder.setNegativeButton("Delete") { dialog, which ->
             // Delete element from db and adapter
@@ -139,7 +140,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
     }
 
     private fun deleteGame(game: Game) {
-        val id = game.id
+        val id = game.title
         val aux = FirebaseDatabase.getInstance().getReference("Games")
         aux.child(id).ref.removeValue().addOnSuccessListener {
             Toast.makeText(applicationContext, "The console was successfully deleted", Toast.LENGTH_SHORT).show()

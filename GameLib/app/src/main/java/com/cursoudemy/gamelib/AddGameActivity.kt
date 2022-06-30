@@ -122,11 +122,11 @@ class AddGameActivity : AppCompatActivity() {
         // Add id, title, console, timestamp, uid
         val hashMap = HashMap<String, Any>()
         hashMap["title"] = title
-        hashMap["id"] = "$timestamp"
+        //hashMap["id"] = "$timestamp"
         hashMap["description"] = description
         hashMap["status"] = gameStatus
         hashMap["console"] = consoleName
-        hashMap["timestamp"] = timestamp
+        //hashMap["timestamp"] = timestamp
         hashMap["uid"] = "${firebaseAuth.uid}"
 
         // Ad to db: Root -> Games
