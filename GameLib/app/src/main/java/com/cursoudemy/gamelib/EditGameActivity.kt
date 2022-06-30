@@ -1,5 +1,6 @@
 package com.cursoudemy.gamelib
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +17,8 @@ class EditGameActivity : AppCompatActivity() {
     private lateinit var firebaseAuth: FirebaseAuth
     private var gameTitle = ""
     private var selectedConsoleName = ""
+    private var selectedConsoleId = ""
+    private var consoleName = ""
     private var consoles: ArrayList<Console> = arrayListOf<Console>()
     private var copyList = consoles.clone() as java.util.ArrayList<Console>
     private lateinit var progressDialog: ProgressDialog
@@ -29,8 +32,6 @@ class EditGameActivity : AppCompatActivity() {
         val actionbar = supportActionBar
         //set actionbar title
         actionbar!!.title = "Edit game"
-        //set back button
-        actionbar.setDisplayHomeAsUpEnabled(true)
         // Get the game title to edit said game
         gameTitle = intent?.extras?.get("title") as String
         // Init Firebase Auth
@@ -41,6 +42,7 @@ class EditGameActivity : AppCompatActivity() {
         progressDialog.setCanceledOnTouchOutside(false)
         // Load the game info into the fields
         loadEditInfo()
+        loadConsoles()
 
         binding.btnBackEditGame.setOnClickListener {
             onBackPressed()
@@ -51,10 +53,33 @@ class EditGameActivity : AppCompatActivity() {
             validateFields()
         }
 
+        binding.tvConsoleAddGame.setOnClickListener {
+            consolePickDialog()
+        }
+
+    }
+
+    private fun consolePickDialog() {
+        // Get string array of the consoles from arraylist
+        val consolesArray = arrayOfNulls<String>(consoles.size)
+        for(i in consolesArray.indices) {
+            consolesArray[i] = consoles[i].console
+        }
+        // Alert dialog
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Pick a console")
+            .setItems(consolesArray) { dialog, which ->
+                // Handle item click and get clicked item
+                selectedConsoleName = consoles[which].console
+                selectedConsoleId = consoles[which].id
+                // Set console to textview
+                binding.tvConsoleAddGame.text = selectedConsoleName
+                consoleName = selectedConsoleName
+            } .show()
     }
 
     private fun validateFields() {
-        TODO("Not yet implemented")
+        //Checks that all the fields aren't empty
     }
 
     private fun loadEditInfo() {
