@@ -1,4 +1,4 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.models
 
 class Console {
     // Variables must match those in Firebase

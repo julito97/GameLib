@@ -1,4 +1,4 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.main
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -12,7 +12,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
 
 class LoginActivity : AppCompatActivity() {
 

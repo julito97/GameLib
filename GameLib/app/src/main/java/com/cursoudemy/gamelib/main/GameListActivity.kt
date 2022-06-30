@@ -1,7 +1,6 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.main
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +8,10 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.cursoudemy.gamelib.adapters.GameAdapter
 import com.cursoudemy.gamelib.databinding.ActivityGameListBinding
+import com.cursoudemy.gamelib.edition.EditGameActivity
+import com.cursoudemy.gamelib.models.Game
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

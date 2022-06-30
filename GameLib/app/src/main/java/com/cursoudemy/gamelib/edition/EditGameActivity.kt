@@ -1,18 +1,17 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.edition
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.cursoudemy.gamelib.databinding.ActivityEditGameBinding
+import com.cursoudemy.gamelib.models.Console
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
 
 class EditGameActivity : AppCompatActivity() {
 

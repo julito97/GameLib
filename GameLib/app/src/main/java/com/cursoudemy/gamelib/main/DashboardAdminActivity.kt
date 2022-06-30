@@ -1,4 +1,4 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.main
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.cursoudemy.gamelib.ConsoleAdapter.ItemClickListener
+import com.cursoudemy.gamelib.edition.AddConsoleActivity
+import com.cursoudemy.gamelib.edition.AddGameActivity
+import com.cursoudemy.gamelib.adapters.ConsoleAdapter
+import com.cursoudemy.gamelib.adapters.ConsoleAdapter.ItemClickListener
 import com.cursoudemy.gamelib.databinding.ActivityDashboardAdminBinding
+import com.cursoudemy.gamelib.models.Console
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

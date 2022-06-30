@@ -1,12 +1,13 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.cursoudemy.gamelib.models.Console
+import com.cursoudemy.gamelib.R
 import com.cursoudemy.gamelib.databinding.RowConsoleBinding
-import com.cursoudemy.gamelib.databinding.RowGameBinding
 
 class ConsoleAdapter(private val consoles: List<Console>, val itemClickListener: ItemClickListener, val textClickListener: TextClickListener):
     RecyclerView.Adapter<ConsoleAdapter.ViewHolder>() {

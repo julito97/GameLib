@@ -1,13 +1,15 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.cursoudemy.gamelib.models.Game
+import com.cursoudemy.gamelib.R
 import com.cursoudemy.gamelib.databinding.RowGameBinding
 
-class GameAdapter (private var games: List<Game>, val itemClickListener: GameAdapter.ItemClickListener): RecyclerView.Adapter<GameAdapter.ViewHolder>()  {
+class GameAdapter (private var games: List<Game>, val itemClickListener: ItemClickListener): RecyclerView.Adapter<GameAdapter.ViewHolder>()  {
 
     private lateinit var context: Context
 

@@ -1,4 +1,4 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.edition
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.cursoudemy.gamelib.databinding.ActivityAddGameBinding
+import com.cursoudemy.gamelib.models.Console
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

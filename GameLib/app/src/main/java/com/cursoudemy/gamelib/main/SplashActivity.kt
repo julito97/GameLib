@@ -1,9 +1,10 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.cursoudemy.gamelib.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError

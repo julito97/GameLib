@@ -1,4 +1,4 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.main
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

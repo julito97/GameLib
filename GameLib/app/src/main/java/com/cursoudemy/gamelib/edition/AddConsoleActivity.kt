@@ -1,4 +1,4 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.edition
 
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity

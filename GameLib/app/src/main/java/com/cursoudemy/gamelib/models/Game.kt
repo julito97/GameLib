@@ -1,4 +1,4 @@
-package com.cursoudemy.gamelib
+package com.cursoudemy.gamelib.models
 
 class Game {
     // Variables that will appear on the Firebase db
