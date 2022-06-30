@@ -29,6 +29,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
     private var copyList = games.clone() as ArrayList<Game>
     private var adapter = GameAdapter(games, this)
     var consoleName = ""
+    var uid = firebaseAuth.currentUser!!.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +48,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
         //
         setUpRecyclerView()
         checkUser()
-        loadGames()
+        loadGames(uid)
 
         //
 
@@ -92,8 +93,8 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
         }
     }
 
-    private fun loadGames() {
-        // Get categories from the db: root > Games
+    private fun loadGames(uid: String) {
+        // Get games from the db: root > Games
         val aux = FirebaseDatabase.getInstance().getReference("Games")
         aux.orderByChild("console").equalTo(consoleName)
             .addValueEventListener(object: ValueEventListener {
