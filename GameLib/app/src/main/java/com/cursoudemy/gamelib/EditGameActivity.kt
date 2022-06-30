@@ -20,6 +20,7 @@ class EditGameActivity : AppCompatActivity() {
     private var copyList = consoles.clone() as java.util.ArrayList<Console>
     private lateinit var progressDialog: ProgressDialog
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditGameBinding.inflate(layoutInflater)
@@ -57,7 +58,13 @@ class EditGameActivity : AppCompatActivity() {
     }
 
     private fun loadEditInfo() {
-        // Search for the game in the database
+        // Search for the game in the database using the title
+        val ref =
+        binding.etGameTitleEditGame
+        binding.etGameDescriptionEditGame
+        binding.etGameStatusEditGame
+        binding.btnEditGame
+        binding.tvConsoleAddGame
         loadConsoles()
     }
 
@@ -73,7 +80,6 @@ class EditGameActivity : AppCompatActivity() {
                     // Add to arraylist
                     consoles.add(consoleModel!!)
                     copyList = consoles.clone() as java.util.ArrayList<Console>
-                    //mAdapter.notifyDataSetChanged();
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -81,4 +87,5 @@ class EditGameActivity : AppCompatActivity() {
             }
         })
     }
+
 }

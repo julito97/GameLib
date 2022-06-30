@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cursoudemy.gamelib.databinding.RowConsoleBinding
+import com.cursoudemy.gamelib.databinding.RowGameBinding
 
 class ConsoleAdapter(private val consoles: List<Console>, val itemClickListener: ItemClickListener, val textClickListener: TextClickListener):
     RecyclerView.Adapter<ConsoleAdapter.ViewHolder>() {
