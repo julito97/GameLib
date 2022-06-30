@@ -32,6 +32,8 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
     private var copyList = consoles.clone() as ArrayList<Console>
     // Adapter
     private var mAdapter = ConsoleAdapter(consoles, this, this)
+    // Para poder filtrar los resultados por usuario conectado
+    var uid = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +42,10 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
 
         // Init Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
+        uid = firebaseAuth.currentUser!!.uid
         setUpRecyclerView()
         checkUser()
-        loadConsoles()
+        loadConsoles(uid)
 
 
         // Search function
@@ -85,7 +88,7 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
         binding.rvConsoles.adapter = mAdapter
     }
 
-    private fun loadConsoles() { // To get the console list from the db
+    private fun loadConsoles(uid: String) { // To get the console list from the db
         // Get categories from the db: root > consoles
         val aux = FirebaseDatabase.getInstance().getReference("Consoles")
         aux.addValueEventListener(object: ValueEventListener {
@@ -94,8 +97,10 @@ class DashboardAdminActivity : AppCompatActivity(), ItemClickListener,
                 consoles.clear()
                 for(ds in snapshot.children) {
                     val consoleModel = ds.getValue(Console::class.java)
-                    // Add to arraylist
-                    consoles.add(consoleModel!!)
+                    if(consoleModel!!.uid == uid) {
+                        // Add to arraylist
+                        consoles.add(consoleModel!!)
+                    }
                     copyList = consoles.clone() as ArrayList<Console>
                     mAdapter.notifyDataSetChanged();
                 }

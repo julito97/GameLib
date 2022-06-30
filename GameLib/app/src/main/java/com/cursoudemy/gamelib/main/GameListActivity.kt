@@ -29,7 +29,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
     private var copyList = games.clone() as ArrayList<Game>
     private var adapter = GameAdapter(games, this)
     var consoleName = ""
-    var uid = firebaseAuth.currentUser!!.uid
+    var uid = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +45,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
         consoleName = intent?.extras?.get("console") as String
         // Init Firebase Auth
         firebaseAuth = FirebaseAuth.getInstance()
+        uid = firebaseAuth.currentUser!!.uid
         //
         setUpRecyclerView()
         checkUser()
@@ -102,7 +103,9 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
                     games.clear()
                     for (ds in snapshot.children) {
                         val modelGame = ds.getValue(Game::class.java)
-                        games.add(modelGame!!)
+                        if(modelGame!!.uid == uid) {
+                            games.add(modelGame!!)
+                        }
                         copyList = games.clone() as ArrayList<Game>
                         adapter.notifyDataSetChanged();
                     }
@@ -118,7 +121,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
 
     override fun onResume() {
         super.onResume()
-        loadGames()
+        loadGames(uid)
     }
 
     override fun onClickItem(game: Game) {
@@ -168,9 +171,6 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
                 copyList = games.clone() as ArrayList<Game>
                 adapter.notifyDataSetChanged();
             }
-        }
-        override fun onCancelled(error: DatabaseError) {
-            TODO("Not yet implemented")
         }
     }) */
     }
