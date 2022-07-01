@@ -69,16 +69,20 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
             }
             adapter.notifyDataSetChanged()
         }
-
+        // Generación de juego aleatorio
         binding.tvRandomGame.setOnClickListener {
-            if(games.isEmpty()) {
-                Toast.makeText(this, "Debes añadir juegos para usar esta funcionalidad", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                var gamesSize = games.size
-                val chosenGame = Random.nextInt(gamesSize)
-                binding.tvRandomGame.setText("Puedes empezar a jugar a " + games[chosenGame].title)
-            }
+            generateRandomGame()
+        }
+    }
+
+    private fun generateRandomGame() {
+        if(games.isEmpty()) {
+            Toast.makeText(this, "Debes añadir juegos para usar esta funcionalidad", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            var gamesSize = games.size
+            val chosenGame = Random.nextInt(gamesSize)
+            binding.tvRandomGame.setText("Puedes empezar a jugar a " + games[chosenGame].title)
         }
     }
 
@@ -95,16 +99,16 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
     private fun checkUser() {
         val firebaseUser = firebaseAuth.currentUser
         if(firebaseUser == null) {
-            // Not logged in, so it must redirect to the main screen
+            // Si no está logueado, mandará a la pantalla de inicio
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
-        else { //properly logged in; don't show anything this time
+        else { // Logueado correctamente, así que no muestra nada
         }
     }
 
     private fun loadGames(uid: String) {
-        // Get games from the db: root > Games
+        // Juegos de la raíz > Games filtrados por uid de quien está conectado y los creó
         val aux = FirebaseDatabase.getInstance().getReference("Games")
         aux.orderByChild("console").equalTo(consoleName)
             .addValueEventListener(object: ValueEventListener {
@@ -123,9 +127,7 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
-
             })
-
         }
 
     override fun onResume() {
