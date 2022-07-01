@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import java.util.*
+import kotlin.random.Random
 
 class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
 
@@ -37,24 +38,21 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
         setContentView(binding.root)
         //actionbar
         val actionbar = supportActionBar
-        //set actionbar title
+        // Título de la action bar
         actionbar!!.title = "Game list"
-        //set back button
+        // Botón de retorno a pantalla anterior
         actionbar.setDisplayHomeAsUpEnabled(true)
-        // Get the console name to filter the games
+        // Nombre de la consola para filtrar los juegos mostrados
         consoleName = intent?.extras?.get("console") as String
-        // Init Firebase Auth
+        // Inicialización de la base de datos
         firebaseAuth = FirebaseAuth.getInstance()
         uid = firebaseAuth.currentUser!!.uid
-        //
+        // Inflado del recyclerview y carga de los juegos según consola seleccionada y usuario actual
         setUpRecyclerView()
         checkUser()
         loadGames(uid)
 
-        //
-
-
-        // Search function
+        // Función de búsqueda
         binding.etSearchGame.doOnTextChanged { text, _, _, _ ->
             val filteredList = arrayListOf<Game>()
             games.clear()
@@ -70,6 +68,17 @@ class GameListActivity : AppCompatActivity(), GameAdapter.ItemClickListener {
                 games.addAll(copyList)
             }
             adapter.notifyDataSetChanged()
+        }
+
+        binding.tvRandomGame.setOnClickListener {
+            if(games.isEmpty()) {
+                Toast.makeText(this, "Debes añadir juegos para usar esta funcionalidad", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                var gamesSize = games.size
+                val chosenGame = Random.nextInt(gamesSize)
+                binding.tvRandomGame.setText("Puedes empezar a jugar a " + games[chosenGame].title)
+            }
         }
     }
 

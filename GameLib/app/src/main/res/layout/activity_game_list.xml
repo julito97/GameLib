@@ -16,12 +16,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tvRandomGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="8dp"
+        android:text="¿No sabes qué jugar? Clickéame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etSearchGame" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvGames"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/etSearchGame"
+        app:layout_constraintTop_toBottomOf="@id/tvRandomGame"
         tools:listitem="@layout/row_game" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
