@@ -1,2 +1,2 @@
 # Gamepedia
- App realizada como proyecto final de DAM
+ App realizada como práctica de Firebase para DAM
